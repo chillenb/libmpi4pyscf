@@ -1,0 +1,12 @@
+# Changes here will be overwritten by Copier; NEVER EDIT MANUALLY
+_commit: 2025.01.22-3-gaa57a17
+_src_path: gh:scientific-python/cookie
+backend: skbuild
+email: chillenbrand15@gmail.com
+full_name: Christopher Hillenbrand
+license: Apache
+org: chillenb
+project_name: libmpi4pyscf
+project_short_description: C++ backend for mpi4pyscf
+url: https://github.com/chillenb/libmpi4pyscf
+vcs: false

@@ -1,0 +1,108 @@
+[build-system]
+requires = ["pybind11", "scikit-build-core>=0.10"]
+build-backend = "scikit_build_core.build"
+
+
+[project]
+name = "libmpi4pyscf"
+version = "0.1.0"
+authors = [
+  { name = "Christopher Hillenbrand", email = "chillenbrand15@gmail.com" },
+]
+description = "C++ backend for mpi4pyscf"
+readme = "README.md"
+requires-python = ">=3.9"
+classifiers = [
+  "Development Status :: 1 - Planning",
+  "Intended Audience :: Science/Research",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: Apache Software License",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Scientific/Engineering",
+  "Typing :: Typed",
+]
+dependencies = ["mpi4py", "pyscf"]
+
+[project.optional-dependencies]
+test = [
+  "pytest >=6",
+  "pytest-cov >=3",
+]
+dev = [
+  "pytest >=6",
+  "pytest-cov >=3",
+]
+docs = [
+  "sphinx>=7.0",
+  "myst_parser>=0.13",
+  "sphinx_copybutton",
+  "sphinx_autodoc_typehints",
+  "furo>=2023.08.17",
+]
+
+[project.urls]
+Homepage = "https://github.com/chillenb/libmpi4pyscf"
+"Bug Tracker" = "https://github.com/chillenb/libmpi4pyscf/issues"
+Discussions = "https://github.com/chillenb/libmpi4pyscf/discussions"
+Changelog = "https://github.com/chillenb/libmpi4pyscf/releases"
+
+
+[tool.scikit-build]
+minimum-version = "build-system.requires"
+build-dir = "build/{wheel_tag}"
+
+
+[tool.uv]
+dev-dependencies = [
+  "libmpi4pyscf[test]",
+]
+
+
+[tool.cibuildwheel]
+test-command = "pytest {project}/tests"
+test-extras = ["test"]
+
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = ["-ra", "--showlocals", "--strict-markers", "--strict-config"]
+xfail_strict = true
+filterwarnings = [
+  "error",
+]
+log_cli_level = "INFO"
+testpaths = [
+  "tests",
+]
+
+
+[tool.coverage]
+run.source = ["libmpi4pyscf"]
+report.exclude_also = [
+  '\.\.\.',
+  'if typing.TYPE_CHECKING:',
+]
+
+
+[tool.pylint]
+py-version = "3.9"
+ignore-paths = [".*/_version.py"]
+extension-pkg-allow-list = ["libmpi4pyscf._core"]
+reports.output-format = "colorized"
+similarities.ignore-imports = "yes"
+messages_control.disable = [
+  "design",
+  "fixme",
+  "line-too-long",
+  "missing-module-docstring",
+  "missing-function-docstring",
+  "wrong-import-position",
+]
